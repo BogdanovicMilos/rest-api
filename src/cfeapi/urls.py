@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from updates.views import json_example_view, JsonCBV, JsonCBV2, SerializedListView, SerializedDetailView
+
+# from updates.views import json_example_view, JsonCBV, JsonCBV2, SerializedListView, SerializedDetailView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^api/auth/', include('accounts.api.urls')),
     url(r'^api/status/', include('status.api.urls')),
     url(r'^api/updates/', include('updates.api.urls')),
 
