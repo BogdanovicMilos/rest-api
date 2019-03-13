@@ -3,7 +3,7 @@ import json
 import os
 
 
-AUTH_ENDPOINT = 'http://127.0.0.1:8000/api/auth/'
+AUTH_ENDPOINT = 'http://127.0.0.1:8000/api/auth/register/'
 REFRESH_ENDPOINT = AUTH_ENDPOINT + 'refresh/'
 ENDPOINT = 'http://127.0.0.1:8000/api/status/'
 
@@ -11,12 +11,15 @@ image_path = os.path.join(os.getcwd(), 'tyson.jpg')
 
 
 headers = {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    # 'Authorization': 'JWT ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6Ik1pbG9zIiwiZXhwIjoxNTUyNDc1MTM4LCJlbWFpbCI6ImJvZ2Rhbm92aWMubWxiQGdtYWlsLmNvbSIsIm9yaWdfaWF0IjoxNTUyNDc0ODM4fQ.-156LGPCDrWnDKUy_9qzDDI7qrVyOGn7HlkBOCRjptw',
 }
 
 data = {
-    'username': 'Milos',
-    'password': 'testing321'
+    'username': 'TestUser8',
+    'email': 'testuser8@company.com',
+    'password': 'testing321',
+    'password2': 'testing321'
 }
 
 r = requests.post(AUTH_ENDPOINT, data=json.dumps(data), headers=headers)
