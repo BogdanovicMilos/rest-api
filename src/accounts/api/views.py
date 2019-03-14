@@ -6,6 +6,8 @@ from rest_framework_jwt.settings import api_settings
 from django.db.models import Q
 
 from .serializers import UserRegisterSerializer
+from .user.serializers import UserDetailSerializer
+from .permissions import AnonlistPermissionOnly
 
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
@@ -17,7 +19,7 @@ User = get_user_model()
 
 
 class AuthAPIView(APIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [AnonlistPermissionOnly]
 
     def post(self, request, *args, **kwargs):
         # print(request.user)
@@ -48,8 +50,10 @@ class AuthAPIView(APIView):
 class RegisterAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserRegisterSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [AnonlistPermissionOnly]
 
+    def get_serializer_context(self, *args, **kwargs):
+        return {'request': self.request}
 
 # class RegisterAPIView(APIView):
 #     permission_classes = [permissions.AllowAny]

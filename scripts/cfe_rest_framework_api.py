@@ -2,29 +2,73 @@ import requests
 import json
 import os
 
-
-AUTH_ENDPOINT = 'http://127.0.0.1:8000/api/auth/register/'
+AUTH_ENDPOINT = 'http://127.0.0.1:8000/api/auth/'
 REFRESH_ENDPOINT = AUTH_ENDPOINT + 'refresh/'
-ENDPOINT = 'http://127.0.0.1:8000/api/status/'
 
 image_path = os.path.join(os.getcwd(), 'tyson.jpg')
 
 
 headers = {
     'Content-Type': 'application/json',
-    # 'Authorization': 'JWT ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6Ik1pbG9zIiwiZXhwIjoxNTUyNDc1MTM4LCJlbWFpbCI6ImJvZ2Rhbm92aWMubWxiQGdtYWlsLmNvbSIsIm9yaWdfaWF0IjoxNTUyNDc0ODM4fQ.-156LGPCDrWnDKUy_9qzDDI7qrVyOGn7HlkBOCRjptw',
+    # 'Authorization': 'JWT ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNSwidXNlcm5hbWUiOiJUZXN0VXNlcjE0IiwiZXhwIjoxNTUyNTYyNzE1LCJlbWFpbCI6InRlc3R1c2VyMTRAY29tcGFueS5jb20iLCJvcmlnX2lhdCI6MTU1MjU2MjQxNX0.A-F4IhV8LzsEQiedC6H1DTt8yuP5NvWiuvNMRPCFclI',
 }
 
 data = {
-    'username': 'TestUser8',
-    'email': 'testuser8@company.com',
+    'username': 'Milos',
     'password': 'testing321',
-    'password2': 'testing321'
 }
 
 r = requests.post(AUTH_ENDPOINT, data=json.dumps(data), headers=headers)
-token = r.json()     # ['token']
+token = r.json()['token']
 print(token)
+
+BASE_ENDPOINT = 'http://127.0.0.1:8000/api/status/'
+ENDPOINT = BASE_ENDPOINT + '21/'
+
+headers2 = {
+    # 'Content-Type': 'application/json',
+    'Authorization': 'JWT ' + token
+}
+
+data2 = {
+    'content': 'this new content post'
+}
+
+# create
+# retrieve
+# update
+# delete
+
+with open(image_path, 'rb') as image:
+    file_data = {'image': image}
+    r = requests.get(ENDPOINT, data=data2, headers=headers2)
+    print(r.text)
+    # r = requests.post(BASE_ENDPOINT, data=data2, headers=headers2, files=file_data)
+    # print(r.text)
+
+
+# AUTH_ENDPOINT = 'http://127.0.0.1:8000/api/auth/register/'
+# REFRESH_ENDPOINT = AUTH_ENDPOINT + 'refresh/'
+# ENDPOINT = 'http://127.0.0.1:8000/api/status/'
+
+# image_path = os.path.join(os.getcwd(), 'tyson.jpg')
+
+
+# headers = {
+#     'Content-Type': 'application/json',
+#     'Authorization': 'JWT ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNSwidXNlcm5hbWUiOiJUZXN0VXNlcjE0IiwiZXhwIjoxNTUyNTYyNzE1LCJlbWFpbCI6InRlc3R1c2VyMTRAY29tcGFueS5jb20iLCJvcmlnX2lhdCI6MTU1MjU2MjQxNX0.A-F4IhV8LzsEQiedC6H1DTt8yuP5NvWiuvNMRPCFclI',
+# }
+
+# data = {
+#     'username': 'TestUser15',
+#     'email': 'testuser15@company.com',
+#     'password': 'testing321',
+#     'password2': 'testing321'
+# }
+
+# r = requests.post(AUTH_ENDPOINT, data=json.dumps(data), headers=headers)
+# token = r.json()     # ['token']
+# print(token)
 
 # refresh_data = {
 #     'token': token
