@@ -28,7 +28,7 @@ class AuthAPIView(APIView):
         data = request.data
         username = data.get('username')
         password = data.get('password')
-        # user = authenxticate(username=username, password=password)
+        # user = authenticate(username=username, password=password)
 
         qs = User.objects.filter(
             Q(username__iexact=username) |
