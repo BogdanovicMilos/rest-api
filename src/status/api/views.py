@@ -156,7 +156,7 @@ class StatusDetailAPIView(mixins.DestroyModelMixin, mixins.UpdateModelMixin, gen
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     queryset = Status.objects.all()
     serializer_class = StatusSerializer
-    # lookup_field = 'id'
+    lookup_field = 'id'
 
     # def get_object(self, *args, **kwargs):
     #     kwargs = self.kwargs
