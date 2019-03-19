@@ -2,7 +2,7 @@ from django.conf.urls import url
 from .views import StatusAPIView, StatusDetailAPIView  # StatusCreateAPIView, StatusUpdateAPIView, StatusDeleteAPIView
 
 urlpatterns = [
-    url(r'^$', StatusAPIView.as_view()),
+    url(r'^$', StatusAPIView.as_view(), name='list'),
     url(r'^(?P<id>\d+)/$', StatusDetailAPIView.as_view(), name='detail'),
     # url(r'^create/$', StatusCreateAPIView.as_view()),
     # url(r'^(?P<pk>\d+)/update/$', StatusUpdateAPIView.as_view()),
